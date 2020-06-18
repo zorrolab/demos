@@ -1,0 +1,357 @@
+<!DOCTYPE html><html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>雅迪</title>
+  <meta name="keywords" content="雅迪">
+  <meta name="description" content="雅迪">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="yadea">
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/laike.css">
+  <script>
+    (function (doc, win) {
+        var docEl = doc.documentElement;
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if (clientWidth < 320) clientWidth=320;
+            docEl.style.fontSize = clientWidth / 1080 * 100 + 'px';
+        };
+        docEl.style.textSizeAdjust = 'auto';
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="top-bar ui-flex align-center">
+        <div class="menu"></div>
+        <div class="logo flex"><img src="./images/yadea.png" alt="雅迪"></div>
+        <div class="user"></div>
+      </div>
+      <div class="top-nav-wrap">
+        <div class="top-nav-sec">
+          <h4>产品</h4>
+          <div class="top-nav-links pros"><a href="laike.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/laike.jpg"></div>
+                <div class="text flex">
+                  <h6>莱客</h6>
+                  <p>超大座桶 超级能装</p>
+                </div>
+              </div></a><a href="mina.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/mina.jpg"></div>
+                <div class="text flex">
+                  <h6>米纳</h6>
+                  <p>就是那么能装，想装多少由你来定</p>
+                </div>
+              </div></a><a href="e3.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/e3.jpg"></div>
+                <div class="text flex">
+                  <h6>E3</h6>
+                  <p>仅限北京地区售卖（中轴版）</p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>服务</h4>
+          <div class="top-nav-links"><a href="bao.html">人车全保 • 丢车包赔</a><a href="policy.html">服务政策</a><a href="store.html">服务网点</a><a href="service.html">三包标准</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪直购</h4>
+          <div class="top-nav-links"><a href="group.html">雅迪团购</a><a href="https://mall.jd.com/index-112057.html">雅迪京东官方旗舰店</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪品质</h4>
+          <div class="top-nav-links"><a href="manufacture.html">雅迪制造</a><a href="supplier.html">供应商名人墙</a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4 class="no-icon"><a href="activity.html">活动</a></h4>
+        </div>
+        <div class="top-nav-sec">
+          <h4>关于我们</h4>
+          <div class="top-nav-links"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资质</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+      </div>
+    </div>
+    <div id="nav-mask" class="mask"></div>
+    <script>
+      window.onload = function() {
+          var navMask = $('#nav-mask'),
+              subNavWraps = $('.top-nav-wrap'),
+              expanded = false,
+              footerMask = $('#nav-mask'),
+              popupLayer = $('.popup-layer');
+      
+          /* Function to animate height: auto */
+          function autoHeightAnimate(element, time){
+              var curHeight = element.height(), // Get Default Height
+                  autoHeight = element.css('height', 'auto').height(); // Get Auto Height
+              element.height(curHeight); // Reset to Default Height
+              element.stop().animate({ height: autoHeight }, time, function() {
+                  element.css('height', 'auto');
+              }); // Animate to Auto Height
+          }
+      
+          $('.top-bar .menu').click(function() {
+              if(!expanded) {
+                  autoHeightAnimate(subNavWraps, 300);
+      
+                  $('.top-bar .menu').addClass('expanded');
+                  navMask.show();
+                  expanded = true;
+              } else {
+                  subNavWraps.stop().animate({
+                      'height': '0'
+                  }, 300, function(){
+                      $('.top-bar .menu').removeClass('expanded');
+                      navMask.hide();
+                      expanded = false;
+                  })
+              }
+          })
+      
+          subNavWraps.find('.top-nav-sec').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              if(target.hasClass('expanded')) {
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              } else {
+                  var oldTarget = target.parent().parent().find('h4.expanded');
+                  oldTarget.toggleClass('expanded');
+                  oldTarget.parent().find('.top-nav-links').toggle();
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              }
+          })
+      
+          $('.footer .links').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              target.toggleClass('expanded');
+              target.parent().find('.links-body').toggle();
+          })
+          $('.footer .icon-weixin').click(function(evt) {
+              footerMask.show();
+              popupLayer.show();
+          })
+          $('.popup-layer .icon-close').click(function(evt) {
+              footerMask.hide();
+              popupLayer.hide();
+          })
+      }
+    </script>
+    <div class="body">
+      <section class="sec1">
+        <div class="text sec-desc">
+          <h4>Yadea<span>莱客</span></h4>
+          <h2>大空间 大有所为</h2>
+          <p>20L 超大座桶 | 530mm 超长坐垫<br>高性能电机</p>
+        </div>
+      </section>
+      <section class="sec2">
+        <div class="img-box"><img src="./images/laike/sec2-bg.jpg"></div>
+        <div class="text sec-desc">
+          <p>雅迪莱客，保持出众外观的同时兼具实用性能。<br>20L超大座桶，530mm大座垫，贴心的细节设计，<br>让每一次出行更加美好。</p>
+        </div>
+      </section>
+      <section class="sec3">
+        <div class="text sec-desc">
+          <h4>580mm 宽裕空间<br>不惧久坐，就是舒服</h4>
+          <p>骑行中我们要与座垫长时间亲密接触，可不能委屈自己。<br>柔软大座垫提供更强承托力，然你骑行更舒畅。</p>
+        </div>
+      </section>
+      <section class="sec4">
+        <div class="text sec-desc">
+          <h4>超强载物能力<br>装得下你每一天的精彩</h4>
+          <p>20L 储物座桶，长达310mm的有效档距，<br>就像一个移动的超大号行李箱。装得下篮球梦，<br>也装得下购物欲。加长踏板，让大长腿也能<br>自如伸展。无论上班、运动、购物或是郊游，<br>都能轻松满足你的储物需求。</p>
+        </div>
+      </section>
+      <section class="sec5">
+        <div class="text sec-desc">
+          <h4>高效节能电机<br>动力澎湃又省电</h4>
+          <p>高性能宽频电机，搭配具有高<br>精度扭矩跟踪系统的黑钻控制器，起步平稳，<br>加速有力，爬坡也可持续稳定地输出动力。</p>
+          <div class="point ui-flex sec-desc">
+            <div class="point-item flex">
+              <h5>+15%</h5>
+              <p>爬坡动力</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="sec6">
+        <div class="text sec-desc">
+          <h4>安全灯光系统<br>为夜晚保驾护航</h4>
+          <p>全方位、无死角灯光组合，前大灯、转向灯、<br>后尾灯、刹车灯、示宽灯以及牌照灯，<br>提供安全性的同时带来超广角的照明区域。<br>雨雪天气也能无惧前行。</p>
+        </div>
+      </section>
+      <section class="sec7">
+        <div class="text sec-desc">
+          <h4>不惧颠簸<br>过坑也能行云流水</h4>
+          <p>遵循摩托车减震标准，经历多种严苛<br>测试，骑行舒适度与耐久性大幅提升。颠簸<br>砂石路也能提供舒适的骑行体验。</p>
+          <div class="point ui-flex sec-desc">
+            <div class="point-item flex">
+              <h5>8级＋</h5>
+              <p>耐腐蚀性</p>
+            </div>
+            <div class="point-item flex">
+              <h5>60<small>万次</small></h5>
+              <p>垂直加震实验</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="sec8">
+        <div class="img-box"><img src="./images/laike/sec8-bg.jpg"></div>
+        <div class="text sec-desc">
+          <h4>不断进化<br>只为做到更好</h4>
+          <p>对底盘、电池、制动系统、轮胎这四<br>个更易受到损坏的部分进行防护与升级，<br>让每一份舒适都更持久。</p>
+        </div>
+        <div class="legend">
+          <div class="ui-flex align-center">
+            <div class="text sec-desc">
+              <h6>底盘全包裹防护</h6>
+              <p>避免电池外漏，防止灰尘、<br>泥水从底部侵蚀车架，<br>延长车辆使用寿命。</p>
+            </div>
+            <div class="img-box"><img src="./images/laike/sec8-bg-1.jpg"></div>
+          </div>
+          <div class="ui-flex align-center">
+            <div class="img-box"><img src="./images/laike/sec8-bg-2.jpg"></div>
+            <div class="text sec-desc">
+              <h6>电池动态修复</h6>
+              <p>车辆运行同时对电池<br>实时修复，电池使用<br>寿命延长20%以上。</p>
+            </div>
+          </div>
+          <div class="ui-flex align-center">
+            <div class="text sec-desc">
+              <h6>加宽真空胎</h6>
+              <p>纹路更深，胎面更宽，<br>雨天更防滑。</p>
+            </div>
+            <div class="img-box"><img src="./images/laike/sec8-bg-3.jpg"></div>
+          </div>
+          <div class="ui-flex align-center">
+            <div class="img-box"><img src="./images/laike/sec8-bg-4.jpg"></div>
+            <div class="text sec-desc">
+              <h6>EBS动能回收</h6>
+              <p>轻点刹车，即可使车<br>辆平稳制动，减少机<br>械刹车的磨损，延长<br>使用寿命。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="sec9">
+        <div class="img-box"><img src="./images/laike/sec9-bg.jpg"></div>
+      </section>
+      <section class="params">
+        <div class="params-title">
+          <h4>更多参数配置</h4>
+        </div>
+        <div class="legend">
+          <div class="row ui-flex align-center">
+            <div class="item ui-flex align-center">
+              <div class="icon"><img src="./images/params-battery.png"></div>
+              <div class="desc">
+                <h6>电池</h6>
+                <p>60V20AH</p>
+              </div>
+            </div>
+            <div class="item ui-flex align-center">
+              <div class="icon"><img src="./images/params-motor.png"></div>
+              <div class="desc">
+                <h6>电机</h6>
+                <p>高效节能电机</p>
+              </div>
+            </div>
+          </div>
+          <div class="row ui-flex align-center">
+            <div class="item ui-flex align-center">
+              <div class="icon"><img src="./images/params-tire.png"></div>
+              <div class="desc">
+                <h6>轮胎</h6>
+                <p>3.0-10真空胎</p>
+              </div>
+            </div>
+            <div class="item ui-flex align-center">
+              <div class="icon"><img src="./images/params-brake.png"></div>
+              <div class="desc">
+                <h6>制动</h6>
+                <p>前碟后鼓</p>
+              </div>
+            </div>
+          </div>
+          <div class="row ui-flex align-center">
+            <div class="item ui-flex align-center">
+              <div class="icon"><img src="./images/params-control.png"></div>
+              <div class="desc">
+                <h6>控制器</h6>
+                <p>12管矢量控制器</p>
+              </div>
+            </div>
+            <div class="item ui-flex align-center">
+              <div class="icon"><img src="./images/params-damping.png"></div>
+              <div class="desc">
+                <h6>减震</h6>
+                <p>前后液压减震</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tips">*本页面涉及到宣传图片、型号、性能、功能等参数仅供参考，<br>具体信息请参照产品实物。<br>产品实物批次不同外观有所差距，一切产品以最终实车为准。</div>
+      </section>
+    </div>
+    <div class="footer"><a href="javascript:window.scrollTo(0,0);" class="top-anchor">顶部</a>
+      <div class="links">
+        <div class="links-sec">
+          <h4>服务与支持</h4>
+          <div class="links-body"><a href="bao.html">人车全保 • 丢车包赔</a><a href="policy.html">服务政策</a><a href="service.html">三包标准</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>帮助中心</h4>
+          <div class="links-body"><a href="store.html">服务网点</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>关于我们</h4>
+          <div class="links-body"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资历</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>活动</h4>
+          <div class="links-body"><a href="activity.html">雅迪活动</a></div>
+        </div>
+        <div class="links-sec social">
+          <h4>关注我们</h4>
+          <div class="links-body"><a href="javascript:;" class="icon-weixin">微信公众号</a><a href="https://weibo.com/1997yadea" target="_blank" class="icon-weibo">新浪微博</a><a href="https://www.facebook.com/yadea.official/" target="_blank" class="icon-facebook">Facebook</a><a href="https://www.instagram.com/yadea_electric_vehicle/" target="_blank" class="icon-instagram">Instagram</a><a href="https://www.youtube.com/channel/UCMjTnR9VMSvm2ITDB9ltZyg?sub_confirmation=1" target="_blank" class="icon-youtube">Youtube</a><a href="https://www.linkedin.com/company/yadea/" target="_blank" class="icon-linkedin">Linkedin</a></div>
+        </div>
+      </div>
+      <div class="global-site"><a href="http://globalyadea.com/">雅迪国际</a></div>
+      <div class="service">
+        <h3>400-900-1212</h3>
+        <p>周一到周日 8:00 - 24:00 (仅收市话费)</p>
+      </div>
+      <div class="copyright">
+        <p>© 2018 雅迪科技集团有限公司 All Rights Reserved 苏ICP备12080415号</p>
+      </div>
+    </div>
+    <div id="footer-mask" class="mask"></div>
+    <div class="popup-layer">
+      <div class="popup-box">
+        <h5>公众号：雅迪电动车</h5>
+        <div class="weixin-qrcode"><img src="./images/weixin-qrcode.png"></div>
+        <h5 style="color:#333333">保存二维码</h5>
+        <div class="line"></div>
+        <p>保存后可在微信扫码关注</p>
+        <div class="icon-close"></div>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/lib.js"></script>
+  <script src="./scripts/laike.js"></script>
+</body></html>
