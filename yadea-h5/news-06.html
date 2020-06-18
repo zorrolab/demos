@@ -1,0 +1,205 @@
+<!DOCTYPE html><html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>雅迪</title>
+  <meta name="keywords" content="雅迪">
+  <meta name="description" content="雅迪">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="yadea">
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/news-detail.css">
+  <script>
+    (function (doc, win) {
+        var docEl = doc.documentElement;
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if (clientWidth < 320) clientWidth=320;
+            docEl.style.fontSize = clientWidth / 1080 * 100 + 'px';
+        };
+        docEl.style.textSizeAdjust = 'auto';
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="top-bar ui-flex align-center">
+        <div class="menu"></div>
+        <div class="logo flex"><img src="./images/yadea.png" alt="雅迪"></div>
+        <div class="user"></div>
+      </div>
+      <div class="top-nav-wrap">
+        <div class="top-nav-sec">
+          <h4>产品</h4>
+          <div class="top-nav-links pros"><a href="//lgw.yadea.com.cn/goods/10020.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/laike.jpg"></div>
+                <div class="text flex">
+                  <h6>莱客</h6>
+                  <p>超大座桶 超级能装</p>
+                </div>
+              </div></a><a href="//lgw.yadea.com.cn/goods/10019.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/mina.jpg"></div>
+                <div class="text flex">
+                  <h6>米纳</h6>
+                  <p>就是那么能装，想装多少由你来定</p>
+                </div>
+              </div></a><a href="e3.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/e3.jpg"></div>
+                <div class="text flex">
+                  <h6>E3</h6>
+                  <p>仅限北京地区售卖（中轴版）</p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>服务</h4>
+          <div class="top-nav-links"><a href="bao.html">安乘宝</a><a href="policy.html">服务政策</a><a href="store.html">服务网点</a><a href="service.html">三包标准</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪直购</h4>
+          <div class="top-nav-links"><a href="group.html">雅迪团购</a><a href="https://mall.jd.com/index-112057.html">雅迪京东自营旗舰店</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪品质</h4>
+          <div class="top-nav-links"><a href="manufacture.html">雅迪制造</a><a href="supplier.html">供应商名人墙</a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4 class="no-icon"><a href="activity.html">活动</a></h4>
+        </div>
+        <div class="top-nav-sec">
+          <h4>关于我们</h4>
+          <div class="top-nav-links"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资质</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+      </div>
+    </div>
+    <div id="nav-mask" class="mask"></div>
+    <script>
+      window.onload = function() {
+          var navMask = $('#nav-mask'),
+              subNavWraps = $('.top-nav-wrap'),
+              expanded = false,
+              footerMask = $('#nav-mask'),
+              popupLayer = $('.popup-layer');
+      
+          /* Function to animate height: auto */
+          function autoHeightAnimate(element, time){
+              var curHeight = element.height(), // Get Default Height
+                  autoHeight = element.css('height', 'auto').height(); // Get Auto Height
+              element.height(curHeight); // Reset to Default Height
+              element.stop().animate({ height: autoHeight }, time, function() {
+                  element.css('height', 'auto');
+              }); // Animate to Auto Height
+          }
+      
+          $('.top-bar .menu').click(function() {
+              if(!expanded) {
+                  autoHeightAnimate(subNavWraps, 300);
+      
+                  $('.top-bar .menu').addClass('expanded');
+                  navMask.show();
+                  expanded = true;
+              } else {
+                  subNavWraps.stop().animate({
+                      'height': '0'
+                  }, 300, function(){
+                      $('.top-bar .menu').removeClass('expanded');
+                      navMask.hide();
+                      expanded = false;
+                  })
+              }
+          })
+      
+          subNavWraps.find('.top-nav-sec').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              if(target.hasClass('expanded')) {
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              } else {
+                  var oldTarget = target.parent().parent().find('h4.expanded');
+                  oldTarget.toggleClass('expanded');
+                  oldTarget.parent().find('.top-nav-links').toggle();
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              }
+          })
+      
+          $('.footer .links').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              target.toggleClass('expanded');
+              target.parent().find('.links-body').toggle();
+          })
+          $('.footer .icon-weixin').click(function(evt) {
+              footerMask.show();
+              popupLayer.show();
+          })
+          $('.popup-layer .icon-close').click(function(evt) {
+              footerMask.hide();
+              popupLayer.hide();
+          })
+      }
+    </script>
+    <div class="body">
+      <div class="title">雅迪代表中国电动车行业赞助2018FIFA俄罗斯世界杯！</div>
+      <div class="line"></div>
+      <div class="post-time">发布时间：2018-03-09</div>
+      <div class="content"><p></p><p>（转自媒体）</p><p style="line-height: 1.75em;">摘要：2月8日上午，在上海的一场发布会上，我们听到了一个令人惊喜的消息：国际足联与全球高端电动车领导品牌雅迪在上海外滩联合宣布，雅迪入选2018年FIFA俄罗斯世界杯官方赞助商!雅迪将获得FIFA世界杯</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　2月8日上午，在上海的一场发布会上，我们听到了一个令人惊喜的消息：国际足联与全球高端电动车领导品牌雅迪在上海外滩联合宣布，雅迪入选2018年FIFA俄罗斯世界杯官方赞助商!雅迪将获得FIFA世界杯官方称谓、赛场场边广告、世界杯各类官方标识及素材使用权等多项权益。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: center; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;"><img src="http://p0.ifengimg.com/pmop/2018/0227/7CC0FD71E275353676D14228E92BD663481A4DF8_size298_w554_h369.png" title="1519703330688945.png" alt="blob.png"></p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　这意味着，雅迪成为电动车行业全球第一家FIFA世界杯官方亚洲赞助商，将和之前成为世界杯官方赞助商的万达、vivo等中国企业，一道作为中国“走出去”企业的代表，通过世界杯的平台，在全球范围内传递中国开放共赢、科技制造的新理念。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　看到这条信息后，我发了这样一条朋友圈：雅迪畅销全球66个国家，作为中国“走出去”代表企业，成为2018年世界杯赞助商，将借助这场盛会和其持续推行的骑行文化，成为中国制造和科技创新的代言人。ps：据媒体报道雅迪赞助世界杯的费用为2000万美元，但雅迪能够给世界杯以及体育、大健康产业带来的价值，将远不止2000万美元。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　的确如此，FIFA世界杯是世界上最具影响力的足球比赛，也是全球最负盛名的体育赛事之一。每届都将有200多个国家和地区、超过30亿观众通过各种渠道观看比赛。而雅迪作为全球电动车行业的领军品牌，已经出口到美国、德国等全球66个国家和地区，连续12年高端销量遥遥领先。此次雅迪牵手2018俄罗斯FIFA世界杯，不管从哪个层面来说，对足球和电动车这两个产业来说都是里程碑事件。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　雅迪牵手世界杯引发了各界热议，那缘何二者能够合作，其背后的考量是什么?未来的雅迪通过世界杯的平台，将会有哪些新的作为，这是我们今天文章所要探讨的话题。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　<span style="box-sizing: border-box; font-weight: 700;">世界杯官方选中雅迪：领先之外的理念吻合</span></p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　世界杯的影响力和关注度毋庸置疑，超过了全球任何一项体育赛事，世界杯运营商选择赞助商可谓苛刻至极，如果有人认为，“出钱”就可以赞助世界杯那就大错特错了。纵观世界杯的赞助商，从阿迪达斯、可口可乐、现代&amp;起亚汽车再到酋长航空、索尼和VISA，无一例外都是全球各个领域的最顶级企业，他们不管从规模还是倡导的理念文化，都能得到普世价值的认可。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　同样对于雅迪来说，坚持自主研发和匠心独用的制造，连续8年高端销量遥遥领先之际，通过线下线上文化体系构建之后，大力推行骑行文化，让广大都市青年又重新回归绿色、健康、低碳的骑行生活，成为中国骑行品牌的代表企业兼骑行文化的引领者，与世界杯这个级别的体育赛事一贯倡导的永争第一、多方合作等理念是极为吻合的。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: center; white-space: normal; background-color: rgb(255, 255, 255);"><img src="https://timg01.bdimg.com/timg?pacompress&imgtype=1&sec=1439619614&autorotate=1&di=f310ba217f0cdc6202124e0fcb940e3c&quality=90&size=b870_10000&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F57cac7286f199237d0c79aac36f90484.jpeg"></p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　在发布会上，雅迪联席总裁刘晔明也表达了这样的观点，在他看来国际足联世界杯，作为观看人数最多的体育盛事，与雅迪的国际化战略以及高端定位完美吻合。与FIFA的合作达成，是雅迪以更高端战略、高品质竞逐全球市场的新坐标。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　同时，雅迪与国际足联的签约，意味着国际足联成立114年来，第一次与两轮电动车企业牵手，也是两轮电动车类产品，自诞生后第一次跻身世界杯的舞台。我们可以大胆预测，同为大健康领域的足球和电动出行，未来二者将有更多的机会跨界合作，为行业贡献一系列创新合作案例。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;"><span style="box-sizing: border-box; font-weight: 700;">　　雅迪“走出去”到66个国家 传递中国创造精神</span></p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　除雅迪之外，笔者也注意到包括万达、英利、海信以及vivo等几个品牌成为了俄罗斯世界杯赞助商中的一员，这些企业无一例外都是中国企业全球化的代表，他们的产品和服务行销5大洲，触及上百个国家。雅迪作为中国企业“走出去”代表，雅迪一直引领着中国电动车行业走向健康发展的道路，2017年，雅迪年销量更是率先突破400万辆大关，创造行业新高，并且已在美国、德国等全球66个国家畅销。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　这批走出去的企业，将成为中国制造和科技创新的代名词。雅迪虽然从体量上无法和阿迪、万达等企业相比，但为什么能够代表中国骑行行业和世界杯牵手。在我看来就是雅迪就是中国创造精神缩影，以我之前提到的雅迪铂金版，从摩托级车架品质到汽车级烤漆、世界级摩托车品质减震等方面进行了22项匠心升级，拥有28项精湛工艺。在不仅仅是在中国，在全球范围内都可谓工匠精神的典范。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　要成为中国制造乃至中国创造的代表，去世界杯“显眼”，不是一句空话，光靠理念先进和喊口号是不行的。雅迪的智能制造“软”和“硬”结合，真正发挥了引领行业的价值。除了硬件层次升级以外，雅迪还推出了诸多的“黑科技”，比如可以让用户通过手机随时掌控电动车、无钥匙启动、一键检测和导航、防盗控制、随时可以为手机等移动终端应急充电等功能。我认为这些智能黑科技甚至在汽车领域都是宝马、奔驰的高端车型才有的，在业内人士看来，雅迪的智能电动车持续进行服务和功能的升级，正在逐步跳出电动车圈层，未来将有望为消费者提供更多维的服务。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: center; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;"><img src="https://timg01.bdimg.com/timg?pacompress&imgtype=1&sec=1439619614&autorotate=1&di=18042a86916fd11f54bd209c9f739df4&quality=90&size=b870_10000&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F972b9feb8ec7e0760e3f0fd4bf247710.jpeg"></p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　这一次我们可以大胆预测，通过世界杯的合作赞助，雅迪有望获取全球更多合作伙伴的认可，进而谋求更大的产品提升和市场拓展空间。事实上的确如此，针对此次合作，雅迪也将进行更大规模的市场投入，联合国内外主流核心媒体，展开丰富多彩的世界杯活动，推出FIFA世界杯限量款高端电动车、FIFA世界杯官方公仔、FIFA世界杯限量版纪念品等，为消费者和球迷带来触手可及的世界杯体验。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　<span style="box-sizing: border-box; font-weight: 700;">骑行文化完善体育产业闭环 正在成为全球新时尚</span></p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　雅迪电动车除了销量和市场份额遥遥领先之外，其倡导的骑行文化才是真正备受行业尊敬的原因所在。去年雅迪在南京、临沂、北海、邓州、郑州、邹城、赣州等100多座城市不断通过“717骑行节”推行其“回归骑行乐趣”的骑行文化，引发也业界广泛的关注和“刷屏”。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　然而，在笔者看来，正如体育精神和足球精神没有国界一样，骑行文化不应该局限在中国本土，更应该向全球推行，过去几年日本、英国等国家政要也多次通过实际行动推广绿色骑行相关活动，这说明绿色、低碳、健康的生活方式是全球的共同需求。很显然，已经把电动车销售到美国等66个国家的雅迪，最适合代表中国骑行企业，在全球范围内推行骑行文化。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　世界杯拥有超过30亿的观众，几乎在全球范围内每个国家都有大量的拥趸，雅迪在通过世界杯的平台获取全球范围销量、影响力的同时，也有望将其倡导的低碳、环保的绿色生活方式和骑行文化推广到全球。</p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: center; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;"><img src="http://p0.ifengimg.com/pmop/2018/0227/202E0F6F0B4498DDF99A9947C08C8389F71BBE66_size319_w554_h430.png" title="1519703343133237.png" alt="blob.png"></p><p style="box-sizing: border-box; margin-top: 10px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, STHeiti, &quot;WenQuanYi Micro Hei&quot;, SimSun, Arial, Helvetica, sans-serif; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); line-height: 1.75em;">　　通过当天的发布会，我们已经嗅到了一丝信号，在当天的发布会上，笔者注意到，雅迪还正式对外公布了最新版本品牌LOGO，在保持原有文字设计的情况下，将原有的倾斜立体图案摆正且扁平化，更显科技范、国际范。未来雅迪将以全新品牌LOGO为基础，展示全新的品牌、产品，及店面的形象，实现雅迪品牌形象的全面提升和国际化。这是不是雅迪骑行文化推广到全球的信号呢?我想，我们大可期待一把。</p><p></p></div>
+    </div>
+    <div class="footer"><a href="javascript:window.scrollTo(0,0);" class="top-anchor">顶部</a>
+      <div class="links">
+        <div class="links-sec">
+          <h4>服务与支持</h4>
+          <div class="links-body"><a href="bao.html">安乘宝</a><a href="policy.html">服务政策</a><a href="service.html">三包标准</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>帮助中心</h4>
+          <div class="links-body"><a href="store.html">服务网点</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>关于我们</h4>
+          <div class="links-body"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资历</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>活动</h4>
+          <div class="links-body"><a href="activity.html">雅迪活动</a></div>
+        </div>
+        <div class="links-sec social">
+          <h4>关注我们</h4>
+          <div class="links-body"><a href="javascript:;" class="icon-weixin">微信公众号</a><a href="https://weibo.com/1997yadea" target="_blank" class="icon-weibo">新浪微博</a><a href="https://www.facebook.com/yadea.official/" target="_blank" class="icon-facebook">Facebook</a><a href="https://www.instagram.com/yadea_electric_vehicle/" target="_blank" class="icon-instagram">Instagram</a><a href="https://www.youtube.com/channel/UCMjTnR9VMSvm2ITDB9ltZyg?sub_confirmation=1" target="_blank" class="icon-youtube">Youtube</a><a href="https://www.linkedin.com/company/yadea/" target="_blank" class="icon-linkedin">Linkedin</a></div>
+        </div>
+      </div>
+      <div class="global-site"><a href="http://globalyadea.com/">雅迪国际</a></div>
+      <div class="service">
+        <h3>400-900-1212</h3>
+        <p>周一到周日 8:00 - 24:00 (仅收市话费)</p>
+      </div>
+      <div class="copyright">
+        <p>© 2018 雅迪科技集团有限公司 All Rights Reserved 苏ICP备12080415号</p>
+      </div>
+    </div>
+    <div id="footer-mask" class="mask"></div>
+    <div class="popup-layer">
+      <div class="popup-box">
+        <h5>公众号：雅迪电动车</h5>
+        <div class="weixin-qrcode"><img src="./images/weixin-qrcode.png"></div>
+        <h5 style="color:#333333">保存二维码</h5>
+        <div class="line"></div>
+        <p>保存后可在微信扫码关注</p>
+        <div class="icon-close"></div>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/lib.js"></script>
+</body></html>

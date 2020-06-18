@@ -1,0 +1,336 @@
+<!DOCTYPE html><html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>雅迪</title>
+  <meta name="keywords" content="雅迪">
+  <meta name="description" content="雅迪">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="yadea">
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/ir.css">
+  <script>
+    (function (doc, win) {
+        var docEl = doc.documentElement;
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if (clientWidth < 320) clientWidth=320;
+            docEl.style.fontSize = clientWidth / 1080 * 100 + 'px';
+        };
+        docEl.style.textSizeAdjust = 'auto';
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="top-bar ui-flex align-center">
+        <div class="menu"></div>
+        <div class="logo flex"><img src="./images/yadea.png" alt="雅迪"></div>
+        <div class="user"></div>
+      </div>
+      <div class="top-nav-wrap">
+        <div class="top-nav-sec">
+          <h4>产品</h4>
+          <div class="top-nav-links pros"><a href="//lgw.yadea.com.cn/goods/10020.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/laike.jpg"></div>
+                <div class="text flex">
+                  <h6>莱客</h6>
+                  <p>超大座桶 超级能装</p>
+                </div>
+              </div></a><a href="//lgw.yadea.com.cn/goods/10019.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/mina.jpg"></div>
+                <div class="text flex">
+                  <h6>米纳</h6>
+                  <p>就是那么能装，想装多少由你来定</p>
+                </div>
+              </div></a><a href="e3.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/e3.jpg"></div>
+                <div class="text flex">
+                  <h6>E3</h6>
+                  <p>仅限北京地区售卖（中轴版）</p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>服务</h4>
+          <div class="top-nav-links"><a href="bao.html">安乘宝</a><a href="policy.html">服务政策</a><a href="store.html">服务网点</a><a href="service.html">三包标准</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪直购</h4>
+          <div class="top-nav-links"><a href="group.html">雅迪团购</a><a href="https://mall.jd.com/index-112057.html">雅迪京东自营旗舰店</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪品质</h4>
+          <div class="top-nav-links"><a href="manufacture.html">雅迪制造</a><a href="supplier.html">供应商名人墙</a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4 class="no-icon"><a href="activity.html">活动</a></h4>
+        </div>
+        <div class="top-nav-sec">
+          <h4>关于我们</h4>
+          <div class="top-nav-links"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资质</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+      </div>
+    </div>
+    <div id="nav-mask" class="mask"></div>
+    <script>
+      window.onload = function() {
+          var navMask = $('#nav-mask'),
+              subNavWraps = $('.top-nav-wrap'),
+              expanded = false,
+              footerMask = $('#nav-mask'),
+              popupLayer = $('.popup-layer');
+      
+          /* Function to animate height: auto */
+          function autoHeightAnimate(element, time){
+              var curHeight = element.height(), // Get Default Height
+                  autoHeight = element.css('height', 'auto').height(); // Get Auto Height
+              element.height(curHeight); // Reset to Default Height
+              element.stop().animate({ height: autoHeight }, time, function() {
+                  element.css('height', 'auto');
+              }); // Animate to Auto Height
+          }
+      
+          $('.top-bar .menu').click(function() {
+              if(!expanded) {
+                  autoHeightAnimate(subNavWraps, 300);
+      
+                  $('.top-bar .menu').addClass('expanded');
+                  navMask.show();
+                  expanded = true;
+              } else {
+                  subNavWraps.stop().animate({
+                      'height': '0'
+                  }, 300, function(){
+                      $('.top-bar .menu').removeClass('expanded');
+                      navMask.hide();
+                      expanded = false;
+                  })
+              }
+          })
+      
+          subNavWraps.find('.top-nav-sec').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              if(target.hasClass('expanded')) {
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              } else {
+                  var oldTarget = target.parent().parent().find('h4.expanded');
+                  oldTarget.toggleClass('expanded');
+                  oldTarget.parent().find('.top-nav-links').toggle();
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              }
+          })
+      
+          $('.footer .links').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              target.toggleClass('expanded');
+              target.parent().find('.links-body').toggle();
+          })
+          $('.footer .icon-weixin').click(function(evt) {
+              footerMask.show();
+              popupLayer.show();
+          })
+          $('.popup-layer .icon-close').click(function(evt) {
+              footerMask.hide();
+              popupLayer.hide();
+          })
+      }
+    </script>
+    <div class="body">
+      <section class="banner">
+        <div class="text">
+          <h2>投资者关系</h2>
+          <p>致力于与资本市场参与者和公众保持透明</p>
+          <p style="margin-top:3.70rem">股票信息即将开通</p>
+        </div>
+      </section>
+      <section class="content description">
+        <div class="text">
+          <h3>企业资料</h3>
+        </div>
+        <div class="line"></div>
+        <div class="points-list">
+          <div class="points-item">
+            <h5>注册办事处</h5>
+            <p>Clifton House 75 Fort Street Grand Cayman KY1-1108 Cayman Islands</p>
+          </div>
+          <div class="points-item">
+            <h5>港主要营业地点</h5>
+            <p>总办事处及中国主要营业地点<br>中国江苏省无锡市锡山区安镇镇大成工业园锡山大道</p>
+            <p>香港主要营业地点<br>香港铜锣湾勿地臣街1号时代广场二座36楼</p>
+          </div>
+          <div class="points-item">
+            <h5>联席公司秘书</h5>
+            <p>沈瑜先生<br>中国江苏省无锡市北塘区惠泉花园66号202室</p>
+            <p>黄秀萍女士ACIS，ACS<br>香港铜锣湾勿地臣街1号时代广场二座36楼</p>
+          </div>
+          <div class="points-item">
+            <h5>授权代表</h5>
+            <p>卓佳证券登记有限公司<br>香港皇后大道东183号合和中心22楼</p>
+            <p>刘晔明先生<br>中国北京市东城区朝内北小街2号4号楼1号门202室</p>
+          </div>
+          <div class="points-item">
+            <h5>香港证券登记处</h5>
+            <p>黄秀萍女士ACIS，ACS<br>香港铜锣湾勿地臣街1号时代广场二座36楼</p>
+            <p>卓佳证券登记有限公司<br>香港皇后大道东183号合和中心22楼</p>
+          </div>
+          <div class="points-item">
+            <h5>博达浩华国际财经传讯集团</h5>
+            <p>地址：香港湾仔港湾道6-8号瑞安中心20楼 2009-2018室<br>电话：（852） 3150 6788<br>传真：（852）3150 6728<br>邮箱：yadea@pordahavas.com</p>
+          </div>
+        </div>
+      </section>
+      <section class="notice">
+        <div class="content">
+          <div class="text">
+            <h3>通知和公函</h3>
+            <div class="line"></div>
+          </div>
+          <div class="notice-list">
+            <ul>
+              <li><a href="">2018年中報設計</a></li>
+              <li><a href="">2017年環境、社會及管治報告</a></li>
+              <li><a href="">於2018年6月6日舉行的股東週年大會的投票結果</a></li>
+              <li><a href="">截至二零一八年四月三十日止月份之股份發行人的證券變動月報表</a></li>
+              <li><a href="">于2018年6月6日（星期三）举行股东周年大会适用的代表委任表格</a></li>
+              <li><a href="">建议发行股份及购回股份的一般授权及重选退任董事及宣派末期股息及股东周年大会通告</a></li>
+              <li><a href="">股东周年大会通告</a></li>
+              <li><a href="">17年年报</a></li>
+              <li><a href="">公告及通告 - [持續關連交易] 持續關連交易 的澄清公告</a></li>
+              <li><a href="">持續關連交易</a></li>
+              <li><a href="">补充公告 - 须予披露交易 认购理财产品</a></li>
+              <li><a href="">須予披露交易 認購理財產品</a></li>
+              <li><a href="">截至二零一八年三月三十一日止月份之股份發行人的證券變勭月報表</a></li>
+              <li><a href="">截至2017年12月31日止年度 年度业绩公告</a></li>
+              <li><a href="">董事會會議通告</a></li>
+              <li><a href="">截至二零一八年二月二十八日止月份之股份發行人的證券變勭月報表</a></li>
+              <li><a href="">截至二零一八年一月三十一日止月份之股份發行人的證券變勭月報表</a></li>
+              <li><a href="">截至二零一七年十二月三十一日止月份之股份發行人的證券變動月報表</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="content cw">
+        <div class="points-list">
+          <div class="points-item">
+            <div class="img-box"><img src="./images/ir/cw1.jpg"></div>
+            <div class="text">
+              <h4>财务报告</h4>
+              <p>即将开通</p>
+              <div class="line"></div>
+            </div>
+          </div>
+          <div class="points-item">
+            <div class="img-box"><img src="./images/ir/cw2.jpg"></div>
+            <div class="text">
+              <h4>财务摘要</h4>
+              <p>即将开通</p>
+              <div class="line"></div>
+            </div>
+          </div>
+          <div class="points-item">
+            <div class="img-box"><img src="./images/ir/cw3.jpg"></div>
+            <div class="text">
+              <h4>财务演示</h4>
+              <p>即将开通</p>
+              <div class="line"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="manage">
+        <div class="content">
+          <div class="text">
+            <h3>企业管治</h3>
+          </div>
+          <div class="line"></div>
+          <div class="points-list">
+            <div class="points-item">
+              <div class="text">
+                <h5>审核委员会</h5>
+                <p>我们已根据上市规则附录14 所载企业管治守则及企业管治报告设立审核委员会，并制定其书面职权范围。</p>
+                <p>审核委员会的主要职责为审阅及监督我们的财务申报程序及集团的内部监控系统、监察审核过程、向董事会提供意见及评价，以及履行董事会可能指派的其他职务及职责。</p>
+                <p>审核委员会由三名成员组成，分别为李宗炜先生、吴邲光先生及姚乃胜先生。审核委员会主席为李宗炜先生，彼为拥有适当专业资格的独立非执行董事。</p>
+              </div>
+            </div>
+            <div class="points-item">
+              <div class="text">
+                <h5>薪酬委员会</h5>
+                <p>我们已根据上市规则附录14 所载企业管治守则及企业管治报告设立薪酬委员会，并制定其书面职权范围。</p>
+                <p>薪酬委员会的主要职责为制定及审阅我们有关董事及高级管理层薪酬的政策及架构以及就有关薪酬制订政策建立正式且具透明度的程序，并就此向董事作出建议，厘定各执行董事及高级管理层的个别薪酬待遇条款，以及参照董事不时议决的企业方针及目标检讨及批准按表现厘定的薪酬。</p>
+                <p>薪酬委员会由三名成员组成，分别为吴邲光先生、姚乃胜先生及刘晔明先生。 薪酬委员会主席为吴邲光先生。</p>
+              </div>
+            </div>
+            <div class="points-item">
+              <div class="text">
+                <h5>提名委员会</h5>
+                <p>我们已根据上市规则附录14 所载企业管治守则及企业管治报告设立审核委员会，并制定其书面职权范围。</p>
+                <p>提名委员会的主要职责为定期检讨董事会的架构、规模及组成，并就任何建议改动向董事会提出建议，物色及挑选董事职务提名人选或就此向董事会提出建议，评核独立非执行董事的独立性，以及就有关委任、重新委任或罢免董事及董事继任计划的相关事宜向董事会提出建议。</p>
+                <p>提名委员会由五名成员组成，分别为董先生、钱女士、姚乃胜先生、吴邲光先生及李宗炜先生。提名委员会主席为董先生。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="footer"><a href="javascript:window.scrollTo(0,0);" class="top-anchor">顶部</a>
+      <div class="links">
+        <div class="links-sec">
+          <h4>服务与支持</h4>
+          <div class="links-body"><a href="bao.html">安乘宝</a><a href="policy.html">服务政策</a><a href="service.html">三包标准</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>帮助中心</h4>
+          <div class="links-body"><a href="store.html">服务网点</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>关于我们</h4>
+          <div class="links-body"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资历</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>活动</h4>
+          <div class="links-body"><a href="activity.html">雅迪活动</a></div>
+        </div>
+        <div class="links-sec social">
+          <h4>关注我们</h4>
+          <div class="links-body"><a href="javascript:;" class="icon-weixin">微信公众号</a><a href="https://weibo.com/1997yadea" target="_blank" class="icon-weibo">新浪微博</a><a href="https://www.facebook.com/yadea.official/" target="_blank" class="icon-facebook">Facebook</a><a href="https://www.instagram.com/yadea_electric_vehicle/" target="_blank" class="icon-instagram">Instagram</a><a href="https://www.youtube.com/channel/UCMjTnR9VMSvm2ITDB9ltZyg?sub_confirmation=1" target="_blank" class="icon-youtube">Youtube</a><a href="https://www.linkedin.com/company/yadea/" target="_blank" class="icon-linkedin">Linkedin</a></div>
+        </div>
+      </div>
+      <div class="global-site"><a href="http://globalyadea.com/">雅迪国际</a></div>
+      <div class="service">
+        <h3>400-900-1212</h3>
+        <p>周一到周日 8:00 - 24:00 (仅收市话费)</p>
+      </div>
+      <div class="copyright">
+        <p>© 2018 雅迪科技集团有限公司 All Rights Reserved 苏ICP备12080415号</p>
+      </div>
+    </div>
+    <div id="footer-mask" class="mask"></div>
+    <div class="popup-layer">
+      <div class="popup-box">
+        <h5>公众号：雅迪电动车</h5>
+        <div class="weixin-qrcode"><img src="./images/weixin-qrcode.png"></div>
+        <h5 style="color:#333333">保存二维码</h5>
+        <div class="line"></div>
+        <p>保存后可在微信扫码关注</p>
+        <div class="icon-close"></div>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/lib.js"></script>
+</body></html>

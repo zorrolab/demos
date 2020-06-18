@@ -1,0 +1,360 @@
+<!DOCTYPE html><html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>雅迪</title>
+  <meta name="keywords" content="雅迪">
+  <meta name="description" content="雅迪">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="yadea">
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/about.css">
+  <script>
+    (function (doc, win) {
+        var docEl = doc.documentElement;
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if (clientWidth < 320) clientWidth=320;
+            docEl.style.fontSize = clientWidth / 1080 * 100 + 'px';
+        };
+        docEl.style.textSizeAdjust = 'auto';
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="top-bar ui-flex align-center">
+        <div class="menu"></div>
+        <div class="logo flex"><img src="./images/yadea.png" alt="雅迪"></div>
+        <div class="user"></div>
+      </div>
+      <div class="top-nav-wrap">
+        <div class="top-nav-sec">
+          <h4>产品</h4>
+          <div class="top-nav-links pros"><a href="//lgw.yadea.com.cn/goods/10020.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/laike.jpg"></div>
+                <div class="text flex">
+                  <h6>莱客</h6>
+                  <p>超大座桶 超级能装</p>
+                </div>
+              </div></a><a href="//lgw.yadea.com.cn/goods/10019.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/mina.jpg"></div>
+                <div class="text flex">
+                  <h6>米纳</h6>
+                  <p>就是那么能装，想装多少由你来定</p>
+                </div>
+              </div></a><a href="e3.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/e3.jpg"></div>
+                <div class="text flex">
+                  <h6>E3</h6>
+                  <p>仅限北京地区售卖（中轴版）</p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>服务</h4>
+          <div class="top-nav-links"><a href="bao.html">安乘宝</a><a href="policy.html">服务政策</a><a href="store.html">服务网点</a><a href="service.html">三包标准</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪直购</h4>
+          <div class="top-nav-links"><a href="group.html">雅迪团购</a><a href="https://mall.jd.com/index-112057.html">雅迪京东自营旗舰店</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪品质</h4>
+          <div class="top-nav-links"><a href="manufacture.html">雅迪制造</a><a href="supplier.html">供应商名人墙</a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4 class="no-icon"><a href="activity.html">活动</a></h4>
+        </div>
+        <div class="top-nav-sec">
+          <h4>关于我们</h4>
+          <div class="top-nav-links"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资质</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+      </div>
+    </div>
+    <div id="nav-mask" class="mask"></div>
+    <script>
+      window.onload = function() {
+          var navMask = $('#nav-mask'),
+              subNavWraps = $('.top-nav-wrap'),
+              expanded = false,
+              footerMask = $('#nav-mask'),
+              popupLayer = $('.popup-layer');
+      
+          /* Function to animate height: auto */
+          function autoHeightAnimate(element, time){
+              var curHeight = element.height(), // Get Default Height
+                  autoHeight = element.css('height', 'auto').height(); // Get Auto Height
+              element.height(curHeight); // Reset to Default Height
+              element.stop().animate({ height: autoHeight }, time, function() {
+                  element.css('height', 'auto');
+              }); // Animate to Auto Height
+          }
+      
+          $('.top-bar .menu').click(function() {
+              if(!expanded) {
+                  autoHeightAnimate(subNavWraps, 300);
+      
+                  $('.top-bar .menu').addClass('expanded');
+                  navMask.show();
+                  expanded = true;
+              } else {
+                  subNavWraps.stop().animate({
+                      'height': '0'
+                  }, 300, function(){
+                      $('.top-bar .menu').removeClass('expanded');
+                      navMask.hide();
+                      expanded = false;
+                  })
+              }
+          })
+      
+          subNavWraps.find('.top-nav-sec').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              if(target.hasClass('expanded')) {
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              } else {
+                  var oldTarget = target.parent().parent().find('h4.expanded');
+                  oldTarget.toggleClass('expanded');
+                  oldTarget.parent().find('.top-nav-links').toggle();
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              }
+          })
+      
+          $('.footer .links').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              target.toggleClass('expanded');
+              target.parent().find('.links-body').toggle();
+          })
+          $('.footer .icon-weixin').click(function(evt) {
+              footerMask.show();
+              popupLayer.show();
+          })
+          $('.popup-layer .icon-close').click(function(evt) {
+              footerMask.hide();
+              popupLayer.hide();
+          })
+      }
+    </script>
+    <div class="body">
+      <section class="banner">
+        <div class="text">
+          <h2>关于雅迪</h2>
+          <p>雅迪是中国电动两轮车上市企业，在收入及盈利能力两方面是中国两轮电动车品牌的典范。</p>
+        </div>
+      </section>
+      <section class="intro-list">
+        <div class="ui-flex">
+          <div class="intro-item">
+            <div class="line"></div>
+            <h3>1875+</h3>
+            <p>分销商</p>
+          </div>
+          <div class="intro-item">
+            <div class="line"></div>
+            <h3>677项</h3>
+            <p>专利</p>
+          </div>
+          <div class="intro-item">
+            <div class="line"></div>
+            <h3>12年</h3>
+            <p>销售领先</p>
+          </div>
+          <div class="intro-item">
+            <div class="line"></div>
+            <h3>77个</h3>
+            <p>出口国家</p>
+          </div>
+        </div>
+      </section>
+      <section class="content description">
+        <div class="text">
+          <h3>企业概况</h3>
+          <p>雅迪科技集团有限公司创立于2001年，经过十几年的高速发展，现已成为集电动自行车、电动摩托车及其零配件研发、生产与销售于一体的高端两轮电动车制造企业。2016年5月19日，雅迪在香港成功上市<br>（股票代码：01585.HK）。</p>
+        </div>
+        <div class="line"></div>
+        <div class="points-list">
+          <div class="points-item">
+            <div class="img-box"><img src="./images/about/gk1.jpg"></div>
+          </div>
+          <div class="points-item">
+            <div class="img-box"><img src="./images/about/gk2.jpg"></div>
+          </div>
+          <div class="points-item">
+            <div class="img-box"><img src="./images/about/gk3.jpg"></div>
+          </div>
+          <div class="points-item">
+            <div class="img-box"><img src="./images/about/gk4.jpg"></div>
+          </div>
+        </div>
+        <div style="text-align:left" class="text">
+          <p>雅迪集团拥有天津、江苏、浙江、广东、重庆、安徽、越南七大生产基地及一家工业设计技术中心，总占地面积约2100亩，年产能逾672万辆, 年销量503万台以上，销售网点遍布全国31多个省市，全国有1875家分销商、10120家高标准的终端门店，渠道覆盖率居行业前列，同时出口77个国家。</p>
+        </div>
+      </section>
+      <section class="product">
+        <div class="content">
+          <div class="text">
+            <h3>提供让消费者有幸福感的产品回归骑行乐趣</h3>
+            <p> 雅迪集团始终坚持“提供让消费者有幸福感的产品”的经营理念，始终推行“高端战略”，包含“更佳设计、更高科技、更优品质、更精制造、更好服务、更多出口”等重要部署。</p>
+            <div class="line"></div>
+          </div>
+          <div class="points-list">
+            <div class="points-item">
+              <div class="text">
+                <h4>更佳设计</h4>
+                <p>雅迪集团委聘若干国际著名的设计公司，KISKA、SWAROVSKI、AMV Design及Boxer Design and Manufacturing Ltd.(Boxer), 协助开发高端电动两轮车产品，以保证继续引领行业发展方向，并提升产品质量与品牌形象。</p>
+                <div class="line"></div>
+              </div>
+              <div class="img-box"><img src="./images/about/cp1.jpg"></div>
+            </div>
+            <div class="points-item">
+              <div class="text">
+                <h4>更高科技</h4>
+                <p>雅迪集团与专门开发和制造高端电动两轮车的美国公司 Lightning  Motors （闪电摩托）订立战略合作协议共同研究及开发高端产品，已成功研制LS-218，时速高达352公里。</p>
+                <div class="line"></div>
+              </div>
+              <div class="img-box"><img src="./images/about/cp2.jpg"></div>
+            </div>
+            <div class="points-item">
+              <div class="text">
+                <h4>更优品质</h4>
+                <p>采用摩托车同级别、汽车同级别的高标准零配件供应商，建设高标准的品质检验体系，严格把控产品品质。</p>
+                <div class="line"></div>
+              </div>
+              <div class="img-box"><img src="./images/about/cp3.jpg"></div>
+            </div>
+            <div class="points-item">
+              <div class="text">
+                <h4>更精制造</h4>
+                <p>车架运用电泳喷塑工艺，采用国际自动编程机器人进行无缝焊接，更结实更耐腐。雅迪集团在行业内率先导入丰田TPS精益生产体系（YPS），成为行业内率先推行质量检测活动常态化企业。</p>
+                <div class="line"></div>
+              </div>
+              <div class="img-box"><img src="./images/about/cp4.jpg"></div>
+            </div>
+            <div class="points-item">
+              <div class="text">
+                <h4>更好服务</h4>
+                <p>雅迪集团大力推进汽车4S同级标准的智美终端店的建设，成为行业荣获五星级服务认证的企业，用户可以享受20项免费服务、365天5分钟响应的一键报修服务、5.2万元安乘宝保险服务，以体系化、体验化建设，持续提升服务品质。</p>
+                <div class="line"></div>
+              </div>
+              <div class="img-box"><img src="./images/about/cp5.jpg"></div>
+            </div>
+            <div class="points-item">
+              <div class="text">
+                <h4>更多出口</h4>
+                <p>雅迪不断加强国际出口业务开拓和国际品牌形象的打造，出口全球77个国家，连续12年高端销量遥遥领先，全球用户逾3000万，品牌价值逾百亿，为全球电动车消费者创造"更高端"的绿色出行方式。</p>
+                <div class="line"></div>
+              </div>
+              <div class="img-box"><img src="./images/about/cp6.jpg"></div>
+            </div>
+          </div>
+          <div class="text">
+            <p>雅迪更有实力与能力提供让消费者有幸福感的产品，进而打造“更高端的电动车”品牌，为全球电动车消费者创造“更高端”的绿色生活方式。</p>
+          </div>
+        </div>
+      </section>
+      <section class="culture">
+        <div class="content">
+          <div class="text">
+            <h3>企业文化</h3>
+            <p>通过富有竞争力的收入分配机制调动员工积极性，同时不断丰富员工精神生活，从而提升企业凝聚力，激发员工创造力，打造出了一支极具执行力的超强战斗团队。</p>
+          </div>
+          <div class="line"></div>
+          <div class="points-list">
+            <div class="img-box"><img src="./images/about/wh.jpg"></div>
+            <div class="text">
+              <h5>企业使命</h5>
+              <p>制造让消费者有幸福感的产品，回归骑行乐趣</p>
+              <h5>企业魂</h5>
+              <p>雅迪秉承“务实、创新”的精神，视质量如生命。用100%的细心,重视1%的细节。雅迪用好车造福民众,雅迪用服务感动上帝。</p>
+              <h5>经营理念</h5>
+              <p>一个中心，五大价值（雅迪以“经销商、供应商持续盈利为中心”，共建共进共赢，以“五大价值”即“品牌价值、产品使用价值、产品外观价值、服务价值、终端形象价值”全面满足用户需求）。</p>
+              <h5>核心价值观</h5>
+              <p>雅迪集团秉承“以人为本”的核心价值观，致力于打造“爱、利他、和谐”的企业文化。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="content gongyi">
+        <div class="text">
+          <h3>梦想之旅 雅迪助力</h3>
+          <p>雅迪科技集团有限公司创立于2001年，经过十几年的高速发展，现已成为集电动自行车</p>
+        </div>
+        <div class="line"></div>
+        <div class="points-list">
+          <div class="points-item">
+            <div class="img-box"><img src="./images/about/mx1.jpg"></div>
+            <div class="desc">
+              <p>2013年，在“梦想之旅 雅迪助力”的晚会上，雅迪梦想基金成立了。雅迪将梦想与公益联系起来，借着冠名中国梦想秀第五季的东风，雅迪投入一百万元，帮助有梦想的人圆梦。</p>
+            </div>
+          </div>
+          <div class="points-item">
+            <div class="img-box"><img src="./images/about/mx2.jpg"></div>
+            <div class="desc">
+              <p>雅迪热心于各种爱心公益事业，曾五年向安徽、贵州、云南等地捐建希望小学，并多次在南方雪灾、汶川地震、玉树地震、雅安地震等灾区捐款捐物。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="footer"><a href="javascript:window.scrollTo(0,0);" class="top-anchor">顶部</a>
+      <div class="links">
+        <div class="links-sec">
+          <h4>服务与支持</h4>
+          <div class="links-body"><a href="bao.html">安乘宝</a><a href="policy.html">服务政策</a><a href="service.html">三包标准</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>帮助中心</h4>
+          <div class="links-body"><a href="store.html">服务网点</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>关于我们</h4>
+          <div class="links-body"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资历</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>活动</h4>
+          <div class="links-body"><a href="activity.html">雅迪活动</a></div>
+        </div>
+        <div class="links-sec social">
+          <h4>关注我们</h4>
+          <div class="links-body"><a href="javascript:;" class="icon-weixin">微信公众号</a><a href="https://weibo.com/1997yadea" target="_blank" class="icon-weibo">新浪微博</a><a href="https://www.facebook.com/yadea.official/" target="_blank" class="icon-facebook">Facebook</a><a href="https://www.instagram.com/yadea_electric_vehicle/" target="_blank" class="icon-instagram">Instagram</a><a href="https://www.youtube.com/channel/UCMjTnR9VMSvm2ITDB9ltZyg?sub_confirmation=1" target="_blank" class="icon-youtube">Youtube</a><a href="https://www.linkedin.com/company/yadea/" target="_blank" class="icon-linkedin">Linkedin</a></div>
+        </div>
+      </div>
+      <div class="global-site"><a href="http://globalyadea.com/">雅迪国际</a></div>
+      <div class="service">
+        <h3>400-900-1212</h3>
+        <p>周一到周日 8:00 - 24:00 (仅收市话费)</p>
+      </div>
+      <div class="copyright">
+        <p>© 2018 雅迪科技集团有限公司 All Rights Reserved 苏ICP备12080415号</p>
+      </div>
+    </div>
+    <div id="footer-mask" class="mask"></div>
+    <div class="popup-layer">
+      <div class="popup-box">
+        <h5>公众号：雅迪电动车</h5>
+        <div class="weixin-qrcode"><img src="./images/weixin-qrcode.png"></div>
+        <h5 style="color:#333333">保存二维码</h5>
+        <div class="line"></div>
+        <p>保存后可在微信扫码关注</p>
+        <div class="icon-close"></div>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/lib.js"></script>
+</body></html>

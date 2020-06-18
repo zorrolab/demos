@@ -1,0 +1,552 @@
+<!DOCTYPE html><html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>雅迪</title>
+  <meta name="keywords" content="雅迪">
+  <meta name="description" content="雅迪">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="yadea">
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/g5.css">
+  <script>
+    (function (doc, win) {
+        var docEl = doc.documentElement;
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        var recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if (clientWidth < 320) clientWidth=320;
+            docEl.style.fontSize = clientWidth / 1080 * 100 + 'px';
+        };
+        docEl.style.textSizeAdjust = 'auto';
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="top-bar ui-flex align-center">
+        <div class="menu"></div>
+        <div class="logo flex"><img src="./images/yadea.png" alt="雅迪"></div>
+        <div class="user"></div>
+      </div>
+      <div class="top-nav-wrap">
+        <div class="top-nav-sec">
+          <h4>产品</h4>
+          <div class="top-nav-links pros"><a href="//lgw.yadea.com.cn/goods/10020.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/laike.jpg"></div>
+                <div class="text flex">
+                  <h6>莱客</h6>
+                  <p>超大座桶 超级能装</p>
+                </div>
+              </div></a><a href="//lgw.yadea.com.cn/goods/10019.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/mina.jpg"></div>
+                <div class="text flex">
+                  <h6>米纳</h6>
+                  <p>就是那么能装，想装多少由你来定</p>
+                </div>
+              </div></a><a href="e3.html">
+              <div class="ui-flex align-center">
+                <div class="img-box"><img src="./images/navs/e3.jpg"></div>
+                <div class="text flex">
+                  <h6>E3</h6>
+                  <p>仅限北京地区售卖（中轴版）</p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>服务</h4>
+          <div class="top-nav-links"><a href="bao.html">安乘宝</a><a href="policy.html">服务政策</a><a href="store.html">服务网点</a><a href="service.html">三包标准</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪直购</h4>
+          <div class="top-nav-links"><a href="group.html">雅迪团购</a><a href="https://mall.jd.com/index-112057.html">雅迪京东自营旗舰店</a></div>
+        </div>
+        <div class="top-nav-sec">
+          <h4>雅迪品质</h4>
+          <div class="top-nav-links"><a href="manufacture.html">雅迪制造</a><a href="supplier.html">供应商名人墙</a>
+          </div>
+        </div>
+        <div class="top-nav-sec">
+          <h4 class="no-icon"><a href="activity.html">活动</a></h4>
+        </div>
+        <div class="top-nav-sec">
+          <h4>关于我们</h4>
+          <div class="top-nav-links"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资质</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+      </div>
+    </div>
+    <div id="nav-mask" class="mask"></div>
+    <script>
+      window.onload = function() {
+          var navMask = $('#nav-mask'),
+              subNavWraps = $('.top-nav-wrap'),
+              expanded = false,
+              footerMask = $('#nav-mask'),
+              popupLayer = $('.popup-layer');
+      
+          /* Function to animate height: auto */
+          function autoHeightAnimate(element, time){
+              var curHeight = element.height(), // Get Default Height
+                  autoHeight = element.css('height', 'auto').height(); // Get Auto Height
+              element.height(curHeight); // Reset to Default Height
+              element.stop().animate({ height: autoHeight }, time, function() {
+                  element.css('height', 'auto');
+              }); // Animate to Auto Height
+          }
+      
+          $('.top-bar .menu').click(function() {
+              if(!expanded) {
+                  autoHeightAnimate(subNavWraps, 300);
+      
+                  $('.top-bar .menu').addClass('expanded');
+                  navMask.show();
+                  expanded = true;
+              } else {
+                  subNavWraps.stop().animate({
+                      'height': '0'
+                  }, 300, function(){
+                      $('.top-bar .menu').removeClass('expanded');
+                      navMask.hide();
+                      expanded = false;
+                  })
+              }
+          })
+      
+          subNavWraps.find('.top-nav-sec').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              if(target.hasClass('expanded')) {
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              } else {
+                  var oldTarget = target.parent().parent().find('h4.expanded');
+                  oldTarget.toggleClass('expanded');
+                  oldTarget.parent().find('.top-nav-links').toggle();
+                  target.toggleClass('expanded');
+                  target.parent().find('.top-nav-links').toggle();
+              }
+          })
+      
+          $('.footer .links').delegate('h4', 'click', function(evt) {
+              var target = $(this);
+              target.toggleClass('expanded');
+              target.parent().find('.links-body').toggle();
+          })
+          $('.footer .icon-weixin').click(function(evt) {
+              footerMask.show();
+              popupLayer.show();
+          })
+          $('.popup-layer .icon-close').click(function(evt) {
+              footerMask.hide();
+              popupLayer.hide();
+          })
+      }
+    </script>
+    <div class="body">
+      <div class="container">
+        <section class="section1"><img src="./images/g5/1.jpg" class="bg">
+          <div class="content sec-title"><img src="./images/g5/logo.png" class="logo">
+            <h1>全新高端<br>智能锂电电摩</h1>
+            <h6>TFT全真彩屏 | GTR3.0 高性能宽频电机<br>原装松下锂电 | 整车智能管理</h6>
+            <div class="btn">查看产品视频</div>
+          </div>
+        </section>
+        <section class="section2">
+          <h2 class="sec-title">G5<br>定义一辆标准的锂电轻摩</h2>
+          <p class="sec-desc">G5是一款符合国家上牌标准的锂电轻便摩托车，集全球大供应链联合打造，并通过欧盟EMARK、CCC、EN15194、CE，4大质量认证标准。G5所有版本配备原装松下锂电，搭载动力宽频电机，内外核心部件以高于摩托车等级标准制造，并率先应用TFT全彩屏显示，智能应用方面更偏向用户安全与车辆防盗。</p>
+          <div class="line"></div>
+        </section>
+        <section class="section3">
+          <div data-parallax-bg class="img-box"><img src="./images/g5/3-bg.jpg" class="bg"></div>
+          <h2 class="sec-title">要好看<br>还要一直好看</h2>
+        </section>
+        <section class="section4"><img src="./images/g5/4.jpg" class="bg">
+          <div class="content">
+            <h2 class="sec-title">真彩色，大视野<br>TFT超薄全真彩屏</h2>
+            <div class="line"></div>
+          </div>
+          <div class="slider">
+            <ul class="panel">
+              <li>
+                <div class="icon ldxs"></div>
+                <h3>来电显示</h3>
+                <p>行驶中也能显示来电号码，不必担心来电漏接，专注骑行。</p>
+              </li>
+            </ul>
+            <ul class="trigger">
+              <li></li>
+              <li class="on"></li>
+              <li></li>
+            </ul>
+          </div>
+        </section>
+        <section class="section5">
+          <h2 class="sec-title">全铝合金压铸车把及后平叉</h2>
+          <h6 class="sec-title">车把及后平叉采用ADC12优质铝合金压铸型材，<br>集强度与美观于一体。</h6>
+          <div class="line"></div>
+          <div class="row">
+            <div class="text sec-title">
+              <h4>全铝合金车把</h4>
+              <p>经测试负重10Kg连续<br>振动30万次无异常</p>
+            </div>
+            <div class="img"><img src="./images/g5/cheba.jpg" alt=""></div>
+          </div>
+          <div class="row">
+            <div class="img"><img src="./images/g5/pingcha.jpg" alt=""></div>
+            <div class="text sec-title">
+              <h4>全铝合金后平叉</h4>
+              <p>经测试整车负重170Kg<br>连续振动100万次无异常。</p>
+            </div>
+          </div>
+        </section>
+        <section class="section6">
+          <div class="img"><img src="./images/g5/youqi.jpg" alt="">
+            <div class="clip-mask"></div>
+          </div>
+          <div class="cnt">
+            <h2 class="sec-title">瑞典贝格进口油漆</h2>
+            <p class="sec-desc">PU800烤漆工艺+9道喷磨工序，<br>经严苛老化测试，漆面光洁如新。</p>
+            <div class="line"></div>
+            <ul class="sec-title">
+              <li class="fir">
+                <div class="big">800 <span>小时</span></div>
+                <div class="small">氙气老化测试</div>
+              </li>
+              <li class="sec">
+                <div class="big">9<span>道</span></div>
+                <div class="small">喷磨工序</div>
+              </li>
+              <li>
+                <div class="big">3<span>年</span></div>
+                <div class="small">如新</div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="section7">
+          <div class="img"><img src="./images/g5/dadeng.jpg" alt="">
+            <div class="clip-mask"></div>
+          </div>
+          <div class="cnt">
+            <h2 class="sec-title">德国拜耳抗紫外线大灯PC件<br>高透光、抗老化，5年如新</h2>
+            <p class="sec-desc">采用PC 原料大灯，防水、防雾化内部处理，有效抑制大灯发黄，老化，使得大灯更磨，更通透。</p>
+            <div class="line"></div>
+          </div>
+        </section>
+        <section class="section8">
+          <div class="img"><img src="./images/g5/motuo.jpg" alt="">
+            <div class="clip-mask"></div>
+          </div>
+          <div class="cnt">
+            <h2 class="sec-title">摩托车标准优质原材料</h2>
+            <p class="sec-desc">车体外壳采用奇美757优质ABS原材料，塑件厚度超普通品牌一倍，柔韧抗冲击。<br>摩托车行业顶尖模具厂建模，成品精度高，塑件衔接细腻更平滑。</p>
+            <div class="line"></div>
+          </div>
+        </section>
+        <section class="section9">
+          <div data-parallax-bg class="img-box"><img src="./images/g5/9-bg.jpg" class="bg"></div>
+          <h2 class="sec-title">动力领先<br>持久耐用</h2>
+        </section>
+        <section class="section10">
+          <h2 class="sec-title">松下18650锂电芯<br>保证强力输出</h2>
+          <h6 class="sec-desc">松下 18650 高能量密度锂电芯，耐温范围可从-20℃至55℃，在保证稳定电能供给的情况下，满足强劲输出、寿命更长。</h6>
+          <ul class="sec-title">
+            <li>
+              <div class="big">8.3KG</div>
+              <div class="small">重量轻</div>
+            </li>
+            <li>
+              <div class="big">-20~55℃</div>
+              <div class="small">超宽耐温范围</div>
+            </li>
+            <li>
+              <div class="big">700-800<span>次</span></div>
+              <div class="small">超长循环寿命</div>
+            </li>
+          </ul>
+          <div class="line"></div>
+          <div class="bg"><img src="./images/g5/halo.png" alt="" class="halo"><img src="./images/g5/halo.png" alt="" class="halo"><img src="./images/g5/dianchi.png" alt="" class="dianchi"></div>
+        </section>
+        <section class="section11">
+          <h2 class="sec-title">松下认证PACK技术<br>BMS智能保护</h2>
+          <h6 class="sec-desc">BMS智能保护电池包PACK技术同样来自松下，抗冲击、耐高温。<br>BMS智能电池管理系统提供全面安全保障，<br>安心使用，免去后顾之忧。</h6>
+          <div class="list sec-title">
+            <ul>
+              <li>短路保护</li>
+              <li>电芯均衡</li>
+              <li>防水抗震</li>
+            </ul>
+            <ul>
+              <li>温度保护</li>
+              <li>过充过放保护</li>
+              <li>过流保护</li>
+            </ul>
+          </div>
+          <div class="line"></div>
+        </section>
+        <section class="section12">
+          <h2>预估续航</h2>
+          <div class="num"><span id="km-counter">120</span>km</div><img src="./images/g5/motuoche.png" alt="">
+          <ul id="km-form">
+            <li>
+              <label for="km-s1">速度</label>
+              <select id="km-s1" name="">
+                <option value="1">1档</option>
+                <option value="2">2档</option>
+              </select>
+            </li>
+            <li>
+              <label for="km-s2">载重</label>
+              <select id="km-s2" name="">
+                <option value="1">50kg</option>
+                <option value="2">100kg</option>
+              </select>
+            </li>
+            <li>
+              <label for="km-s3">环境温度</label>
+              <select id="km-s3" name="">
+                <option value="1">0℃</option>
+                <option value="2">25℃</option>
+              </select>
+            </li>
+          </ul>
+        </section>
+        <section class="section13">
+          <h2 class="sec-title">GTR 3.0 高性能宽频防水电机<br>动力强劲，能耗更低</h2>
+          <h6 class="sec-desc">采用荣获国家专利的雅迪自研 GTR 电机，扭力强劲爬坡有力，防水等级可达IP57，特殊矽钢片开槽工艺提供更高效率，能耗更低更省电。</h6>
+          <div class="bottom sec-title">
+            <ul>
+              <li>
+                <div class="big">IP57</div>
+                <div class="small">防水等级</div>
+              </li>
+              <li>
+                <div class="big">13N.m</div>
+                <div class="small">扭矩</div>
+              </li>
+              <li>
+                <div class="big">1500W</div>
+                <div class="small">功率</div>
+              </li>
+            </ul>
+            <div class="line"></div>
+          </div>
+        </section>
+        <section class="section14">
+          <h2 class="sec-title">高功率FOC矢量控制器</h2>
+          <h6 class="sec-desc">18管大功率FOC矢量控制器，输出电流高达180A，转化效率超过96%，行驶平稳、加速顺滑。</h6>
+          <div class="line"></div>
+        </section>
+        <section class="section15">
+          <h2 class="sec-title">铝合金静音充电器<br>高效与美貌兼得</h2>
+          <h6 class="sec-desc">充电器具备V0阻燃等级，并采用进口灌胶技术，电能转化可高达 92%，不仅防水散热还节能安全。全铝阳极氧化+PC面板组合，为颜值加分。</h6>
+          <div class="line"></div>
+        </section>
+        <section class="section16">
+          <div data-parallax-bg class="img-box"><img src="./images/g5/16-bg.jpg" class="bg"></div>
+          <h3 class="sec-title">稳定·舒适·安全<br>每个细节<br>都为骑行考虑</h3>
+        </section>
+        <section class="section17">
+          <div class="img-box-highlight"></div>
+          <div class="bottom text">
+            <h2 class="sec-title">缺气保用轮胎<br>扎胎亏气照样开</h2>
+            <h6 class="sec-desc">独创自体支撑技术，可分散应力改变受力状况，0气压时仍能以小于30Km/h骑行40Km，大幅提升缺气情况下骑行里程。轮胎材料采用高耐磨配方，提升耐载耐扎性能，磨耗里程是普通轮胎的1.2倍。</h6>
+            <div class="line"></div>
+          </div>
+        </section>
+        <section class="section18">
+          <div class="img-box-highlight"></div>
+          <div class="bottom text">
+            <h2 class="sec-title">优质液压减震<br>摩托车同级标准</h2>
+            <h6 class="sec-desc">优质碳素钢弹簧+超长减震行程，有效的缓解来自地面的冲击，面对颠簸路面，也能舒适前行。</h6>
+            <div class="line"></div>
+            <ul class="sec-title">
+              <li>
+                <div class="big">65<span>Mn</span></div>
+                <div class="small">碳素钢弹簧</div>
+              </li>
+              <li>
+                <div class="big">89<span>mm</span></div>
+                <div class="small">最大减震行程</div>
+              </li>
+              <li>
+                <div class="big">200<span>万次</span></div>
+                <div class="small">垂直加震实验</div>
+              </li>
+              <li>
+                <div class="big">8<span>级</span></div>
+                <div class="small">电镀防锈</div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="section19">
+          <h2 class="sec-title">优质冷轧结构钢车架<br>双涂层防护</h2>
+          <h6 class="sec-desc">高精度焊接及双头镗孔工艺经47道工序精心打造，优化车架稳定性，强化车身安全。电泳+喷塑双重防护，有效防水防腐蚀，延长车架使用寿命。</h6>
+          <div class="line"></div>
+          <ul class="sec-title">
+            <li>
+              <div class="big">100<span>万次</span></div>
+              <div class="small">震动实验</div>
+            </li>
+            <li>
+              <div class="big">&lt;0.5<span>mm</span></div>
+              <div class="small">定位公差</div>
+            </li>
+          </ul>
+          <ul class="sec-title">
+            <li>
+              <div class="big">1倍<span>漆膜<br>厚度</span></div>
+              <div class="small">与电泳厚度对比</div>
+            </li>
+            <li>
+              <div class="big">90%<span>密封<br>包裹性</span></div>
+              <div class="small">整车防水</div>
+            </li>
+          </ul>
+        </section>
+        <section class="section20">
+          <div class="img-box-highlight"></div>
+          <div class="text">
+            <h2 class="sec-title">前后超静音，对置缸碟刹</h2>
+            <h6 class="sec-desc">前后配备 220 mm碟刹盘，提供更大制动力，采用铜基超耐磨制动片，强力制动并降低磨损量。刹车片制动结束与刹盘完全脱开，消除摩擦噪音</h6>
+            <div class="line"></div>
+            <ul class="sec-title">
+              <li>
+                <div class="big">220<span>mm</span></div>
+                <div class="small">前后碟刹片</div>
+              </li>
+              <li>
+                <div class="big">>0.4<span>mm</span></div>
+                <div class="small">泵体回位量</div>
+              </li>
+              <li>
+                <div class="big">0.5<span>mm</span></div>
+                <div class="small">制动千次磨损量</div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="section21">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <h4>背光功能手把组合开关</h4>
+                <div class="img-box"><img src="./images/g5/sec21-slide-1.jpg"></div>
+                <p>开关按键具有背光功能，黑暗处也能准确操作，拯救手盲，避免尴尬</p>
+              </div>
+              <div class="swiper-slide">
+                <h4>全车 LED 灯光及大灯延时功能</h4>
+                <div class="img-box"><img src="./images/g5/sec21-slide-2.jpg"></div>
+                <p>全车灯具采用LED照明，大灯亮度高，辅路效果好，警示灯穿透力强，黑暗处也容易发现。特别加入最长15s的灯光延时关闭功能，回家的路，全方位看护。</p>
+              </div>
+              <div class="swiper-slide">
+                <h4>加厚高弹防盗座垫，不止舒适</h4>
+                <div class="img-box"><img src="./images/g5/sec21-slide-3.jpg"></div>
+                <p>座垫材料采用高弹性聚氨酯发泡，柔软舒适，呵护腰臀。座垫底板厚度≥3mm，耐冲击防开裂，特有防盗墙设计，座垫与座桶间隙密闭，加强防盗。</p>
+              </div>
+              <div class="swiper-slide">
+                <h4>阻燃线缆+防水插接件，让安全更深入</h4>
+                <div class="img-box"><img src="./images/g5/sec21-slide-4.jpg"></div>
+                <p>V-1级阻燃线材，防止高温燃。防水接插件，避免短路。</p>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </section>
+        <section class="section22">
+          <div data-parallax-bg class="img-box"><img src="./images/g5/22-bg.jpg" class="bg"></div>
+          <h3 class="sec-title">智能绝不缺席<br>贴心面面俱到</h3>
+        </section>
+        <section class="section23">
+          <h2 class="sec-title">智能中控+智能APP</h2>
+          <h6 class="sec-desc">智能中控技术配合新一代出行APP，<br>让您掌控所有车辆信息。</h6>
+          <ul class="sec-title">
+            <li>车辆位置掌握</li>
+            <li>车辆行为设置</li>
+            <li>车辆健康自检</li>
+            <li>车辆状态查询</li>
+          </ul>
+          <div class="line"></div>
+          <div class="row">
+            <div class="text sec-title">
+              <h4>三模GPS定位<br>警戒随时在线</h4>
+              <p>北斗+GPS+AGPS三模定位更精确，随时查看车辆位置。可设置电子围栏，如超出设置范围，迅速远程报警。12V单供电池，即使主电池离车照样戒备森严。</p>
+            </div>
+            <div class="img"><img src="./images/g5/gps.jpg" alt=""></div>
+          </div>
+          <div class="row">
+            <div class="img"><img src="./images/g5/yaoshi.jpg" alt=""></div>
+            <div class="text sec-title">
+              <h4>无钥匙解锁<br>ITO一键触控启动</h4>
+              <p>采用德国博世配套体系平台打造，无钥匙解锁，ITO触控启动，一键即走。</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="text sec-title">
+              <h4>一键开坐垫<br>轻松取物</h4>
+              <p>点击手把开关开座桶键即可打开坐垫电子锁，照明不足或双手不便状态也能轻松搞定</p>
+            </div>
+            <div class="img"><img src="./images/g5/shouji.jpg" alt=""></div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="footer"><a href="javascript:window.scrollTo(0,0);" class="top-anchor">顶部</a>
+      <div class="links">
+        <div class="links-sec">
+          <h4>服务与支持</h4>
+          <div class="links-body"><a href="bao.html">安乘宝</a><a href="policy.html">服务政策</a><a href="service.html">三包标准</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>帮助中心</h4>
+          <div class="links-body"><a href="store.html">服务网点</a><a href="antifake.html">防伪查询</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>关于我们</h4>
+          <div class="links-body"><a href="about.html">走进雅迪</a><a href="course.html">发展历程</a><a href="honor.html">荣誉资历</a><a href="ir.html">投资者关系</a><a href="join.html">加入我们</a><a href="contact.html">联系我们</a></div>
+        </div>
+        <div class="links-sec">
+          <h4>活动</h4>
+          <div class="links-body"><a href="activity.html">雅迪活动</a></div>
+        </div>
+        <div class="links-sec social">
+          <h4>关注我们</h4>
+          <div class="links-body"><a href="javascript:;" class="icon-weixin">微信公众号</a><a href="https://weibo.com/1997yadea" target="_blank" class="icon-weibo">新浪微博</a><a href="https://www.facebook.com/yadea.official/" target="_blank" class="icon-facebook">Facebook</a><a href="https://www.instagram.com/yadea_electric_vehicle/" target="_blank" class="icon-instagram">Instagram</a><a href="https://www.youtube.com/channel/UCMjTnR9VMSvm2ITDB9ltZyg?sub_confirmation=1" target="_blank" class="icon-youtube">Youtube</a><a href="https://www.linkedin.com/company/yadea/" target="_blank" class="icon-linkedin">Linkedin</a></div>
+        </div>
+      </div>
+      <div class="global-site"><a href="http://globalyadea.com/">雅迪国际</a></div>
+      <div class="service">
+        <h3>400-900-1212</h3>
+        <p>周一到周日 8:00 - 24:00 (仅收市话费)</p>
+      </div>
+      <div class="copyright">
+        <p>© 2018 雅迪科技集团有限公司 All Rights Reserved 苏ICP备12080415号</p>
+      </div>
+    </div>
+    <div id="footer-mask" class="mask"></div>
+    <div class="popup-layer">
+      <div class="popup-box">
+        <h5>公众号：雅迪电动车</h5>
+        <div class="weixin-qrcode"><img src="./images/weixin-qrcode.png"></div>
+        <h5 style="color:#333333">保存二维码</h5>
+        <div class="line"></div>
+        <p>保存后可在微信扫码关注</p>
+        <div class="icon-close"></div>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/lib.js"></script>
+  <script src="./scripts/g5.js"></script>
+</body></html>
